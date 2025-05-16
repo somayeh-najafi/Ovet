@@ -180,7 +180,7 @@ disease_product_mapping = {
         "not_for": [],
         "category": ["category_non-allergenic"],
         "custom_dog" : ["H_D_P13","H_D_P14","H_D_P15","H_D_P16","H_D_P17","H_D_P18","H_D_P19","H_D_P20","H_D_P21","H_D_P22","H_D_P23","H_D_P24","H_D_P25","H_D_P26",
-                    "RC_D_P12","RC_D_P13","RC_D_P14","RC_D_P15","RC_D_P25","P_D_P08","P_D_P10","R_DP16"],
+                    "RC_D_P12","RC_D_P13","RC_D_P14","RC_D_P15","RC_D_P25","P_D_P08","P_D_P10","R_D_P16"],
         "custom_cat" : []
     },
     "flea_allergy_dermatitis": {

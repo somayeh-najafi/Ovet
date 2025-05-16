@@ -60,7 +60,21 @@ disease_product_mapping = {
     "gastroenteritis": {
         "for": ["for_gastroenteritis"],
         "not_for": ["not_for_dehydration"],
-        "category": ["category_digestive care"]
+        "category": ["category_digestive care"],
+        "custom_dog": ["H_D_P01","H_D_P02","H_D_P03","H_D_P04","H_D_P05","H_D_P06","H_D_P07","H_D_P08","H_D_P09","H_D_P10","H_D_P11",
+                       "H_D_P12","H_D_P13","H_D_P14","H_D_P15","H_D_P16","H_D_P17","H_D_P18","H_D_P19","H_D_P20","H_D_P21","H_D_P22",
+                       "H_D_P23","H_D_P24","H_D_P25","H_D_P26","H_D_P27","H_D_P28","H_D_P29","H_D_P30","H_D_P31","H_D_P32","H_D_P33",
+                       "H_D_P34","H_D_P35","H_D_P36","H_D_P37","H_D_P38","H_D_P39","H_D_P40","H_D_P41","H_D_P42","H_D_P43","H_D_P44",
+                       "H_D_P45","H_D_P46","H_D_P47","H_D_P48","H_D_P49","H_D_P50","H_D_P51","H_D_P52","H_D_P53","H_D_P54","H_D_P55",
+                       "H_D_P56","H_D_P57","H_D_P58","H_D_P59","H_D_P60","H_D_P61","H_D_P62","H_D_P67","H_D_P68","H_D_P69","H_D_P70",
+                       "H_D_P71","H_D_P72","H_D_P73","R_D_P03","R_D_P04","R_D_P05","R_D_P06","R_D_P07","R_D_P08","R_D_P09","R_D_P10",
+                       "R_D_P11","R_D_P12","R_D_P13","R_D_P14","R_D_P15","R_D_P16","R_D_P17","R_D_P18","R_D_P19","R_D_P20","R_D_P21",
+                       "RC_D_P01","RC_D_P02","RC_D_P03","RC_D_P04","RC_D_P05","RC_D_P06","RC_D_P07","RC_D_P08","RC_D_P09","RC_D_P10",
+                       "RC_D_P11","RC_D_P12","RC_D_P13","RC_D_P14","RC_D_P15","RC_D_P16","RC_D_P17","RC_D_P18","RC_D_P19","RC_D_P20",
+                       "RC_D_P21","RC_D_P22","RC_D_P23","RC_D_P24","RC_D_P25","RC_D_P26","RC_D_P27","RC_D_P28","RC_D_P29","RC_D_P30",
+                       "RC_D_P31","RC_D_P32","RC_D_P33","RC_D_P34","RC_D_P35","RC_D_P36","RC_D_P37","RC_D_P38","P_D_P04","P_D_P05",
+                       "P_D_P06","P_D_P07","P_D_P08","P_D_P09","P_D_P10","P_D_P23","P_D_P24","P_D_P25","P_D_P26"],
+        "custim_cat": []
     },
     "food_sensitivity": {
         "for": ["for_food sensitivity"],
@@ -122,7 +136,9 @@ disease_product_mapping = {
     "feline_luts": {
         "for": ["for_urinary health","for_feline luts"],
         "not_for": ["not_for_struvite","not_for_urinary problems"],
-        "category": ["category_urinary care"]
+        "category": ["category_urinary care"],
+        "custom_dog": [],
+        "custom_cat": []
     },
     "urinary_tract_infection": {
         "for": ["for_urinary health"],
@@ -162,7 +178,10 @@ disease_product_mapping = {
     "atopic_dermatitis": {
         "for": ["for_atopic dermatitis","for_skin health"],
         "not_for": [],
-        "category": ["category_non-allergenic"]
+        "category": ["category_non-allergenic"],
+        "custom_dog" : ["H_D_P13","H_D_P14","H_D_P15","H_D_P16","H_D_P17","H_D_P18","H_D_P19","H_D_P20","H_D_P21","H_D_P22","H_D_P23","H_D_P24","H_D_P25","H_D_P26",
+                    "RC_D_P12","RC_D_P13","RC_D_P14","RC_D_P15","RC_D_P25","P_D_P08","P_D_P10"],
+        "custom_cat" : []
     },
     "flea_allergy_dermatitis": {
         "for": ["for_skin health","for_healthy immune system"],
@@ -259,9 +278,11 @@ disease_product_mapping = {
         "category": ["category_high protein"]
     },
     "arthritis": {
-        "for": ["for_bone and joint health"],
+        "for": ["for_bone and joint health","for_weight management"],
         "not_for": ["not_for_overweight"],
-        "category": ["category_weight management"]
+        "category": ["category_weight management"],
+        "custom_dog": [],
+        "custom_cat": ["H_C_P28","H_C_P29","H_C_P30","H_C_P31"]
     },
     # ===== NEUROLOGICAL =====
     "epilepsy": {
@@ -352,7 +373,9 @@ disease_product_mapping = {
     "vision_problem": {
         "for": ["for_vision health"],
         "not_for": [],
-        "category": ["category_antioxidant_rich"]
+        "category": ["category_antioxidant_rich"],
+        "custom_dog": [],
+        "custim_cat": ["P_C_P25","P_C_P26","P_C_P27","P_C_P28","P_C_P29","P_C_P30","P_C_P31","P_C_P32"]
     },
     "dental_issue": {
         "for": ["for_dental health"],
@@ -453,11 +476,23 @@ def filter_by_condition(df, column, value):
     return df
 
 def filter_for_tags(df, disease_info):
-    """Apply 'for' tag filters from disease_info."""
-    if 'for' in disease_info:
-        for tag in disease_info['for']:
-            df = filter_by_condition(df, tag, 1)
-    return df
+    """Combine (union) DataFrames filtered by each 'for' tag individually."""
+    if 'for' not in disease_info or not disease_info['for']:
+        return df
+    
+    filtered_dfs = []
+    for tag in disease_info['for']:
+        if tag in df.columns:
+            temp_df = df[df[tag] == 1]
+            if not temp_df.empty:
+                filtered_dfs.append(temp_df)
+                logger.debug(f"Filtered by '{tag}': {len(temp_df)} rows found")
+    
+    if filtered_dfs:
+        combined_df = pd.concat(filtered_dfs).drop_duplicates()
+        logger.debug(f"Combined 'for' tags: {len(combined_df)} rows total")
+        return combined_df
+    return df  # No matches for any tag
 
 def filter_not_for_tags(df, disease_info):
     """Apply 'not_for' tag filters from disease_info."""
@@ -504,6 +539,9 @@ def filter_products(df_pet_info, df_products):
     # species_col = f"Species_{df_pet_info['species']}"
     df_filtered = filter_by_condition(df_products, species_col, 1)
 
+    # Store original product IDs before filtering for main issue
+    original_product_ids = set(df_filtered['Product_id'].tolist())
+
     # Filter by main issue (if any)
     main_issue = df_pet_info.iloc[0]['main_issue'] 
     if main_issue in disease_product_mapping:
@@ -514,6 +552,23 @@ def filter_products(df_pet_info, df_products):
         df_filtered = filter_type_tags(df_filtered, disease_info)
         df_filtered = filter_category_tags(df_filtered, disease_info)
         df_filtered = filter_has_tags(df_filtered, disease_info)
+
+        # Check for custom products after main filtering
+        species = df_pet_info.iloc[0]['species'].lower()
+        custom_key = f"custom_{species}"
+        
+        if custom_key in disease_info and disease_info[custom_key]:
+            custom_products = disease_info[custom_key]
+            # Get products that were in original set but filtered out
+            removed_custom_products = [pid for pid in custom_products 
+                                     if pid in original_product_ids and pid not in df_filtered['Product_id'].values]
+            
+            if removed_custom_products:
+                # Add back the custom products that were filtered out
+                custom_df = df_products[df_products['Product_id'].isin(removed_custom_products)]
+
+                df_filtered = pd.concat([df_filtered, custom_df]).drop_duplicates()
+                logger.info(f"Added back {len(removed_custom_products)} custom products for {species}")
 
     # Filter by allergies
     # if df_pet_info.iloc[0]['allergy'] == 1:

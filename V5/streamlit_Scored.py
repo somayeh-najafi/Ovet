@@ -190,9 +190,9 @@ if submitted:
         if is_invalid:
             errors.append(f"Please select {field.replace('_', ' ')}.")
 
-    if weight <= 0:
+    if weight is not None and weight <= 0:
         errors.append("Weight must be greater than 0")
-    if age <= 0:
+    if age is not None and age <= 0: 
         errors.append("Age must be greater than 0")
 
     if errors:

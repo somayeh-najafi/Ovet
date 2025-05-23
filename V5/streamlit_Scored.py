@@ -134,14 +134,14 @@ with st.form("pet_form"):
         "Weight (kg)", 
         min_value=0.0, 
         step=0.1, 
-        value=None,
+        value=0,
         key='weight'
     )
     age = st.number_input(
         "Age (months)", 
         min_value=0, 
         step=1, 
-        value=None,
+        value=0,
         key='age'
     )
     body_score = st.slider(
@@ -190,10 +190,10 @@ if submitted:
         if is_invalid:
             errors.append(f"Please select {field.replace('_', ' ')}.")
 
-    if weight is not None and weight <= 0:
-        errors.append("Weight must be greater than 0")
-    if age is not None and age <= 0: 
-        errors.append("Age must be greater than 0")
+    #if weight is not None and weight <= 0:
+     #   errors.append("Weight must be greater than 0")
+    #if age is not None and age <= 0: 
+      #  errors.append("Age must be greater than 0")
 
     if errors:
         for error in errors:
@@ -208,8 +208,8 @@ if submitted:
         pet_info = {
             "species": species,
             "life_stage": life_stage.lower(),
-            "weight": float(weight) if weight is not None else None,
-            "age (months)": int(age) if age is not None else None,
+            "weight": float(weight) ,
+            "age (months)": int(age),
             "activity level": activity_level.lower(),
             "main_issue": main_issue.lower(),
             "other_issues": has_other_issues,

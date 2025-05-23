@@ -134,7 +134,7 @@ with st.form("pet_form"):
         "Weight (kg)", 
         min_value=0.0, 
         step=0.1, 
-        value=0,
+        value=0.0,
         key='weight'
     )
     age = st.number_input(

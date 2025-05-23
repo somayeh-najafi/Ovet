@@ -134,14 +134,14 @@ with st.form("pet_form"):
         "Weight (kg)", 
         min_value=0.0, 
         step=0.1, 
-        value=0.0,
+        value=None,
         key='weight'
     )
     age = st.number_input(
         "Age (months)", 
         min_value=0, 
         step=1, 
-        value=0,
+        value=None,
         key='age'
     )
     body_score = st.slider(
@@ -183,7 +183,7 @@ if submitted:
         "activity_level": activity_level == "-- Select activity level --",
         "allergy": has_allergy is None,
         #"main_issue": main_issue == "-- Select main issue --",
-        "gender": has_gender is None
+        #"gender": has_gender is None
     }
 
     for field, is_invalid in validation_checks.items():
@@ -208,8 +208,8 @@ if submitted:
         pet_info = {
             "species": species,
             "life_stage": life_stage.lower(),
-            "weight": float(weight),
-            "age (months)": int(age),
+            "weight": float(weight) if weight is not None else None,
+            "age (months)": int(age) if age is not None else None,
             "activity level": activity_level.lower(),
             "main_issue": main_issue.lower(),
             "other_issues": has_other_issues,

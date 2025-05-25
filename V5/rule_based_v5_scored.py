@@ -544,7 +544,6 @@ def filter_life_stage(df, life_stage):
 def filter_products(df_pet_info, df_products):
     """Main filtering logic for pet products."""
     species_col = f"Species_{df_pet_info.iloc[0]['species']}"
-    # species_col = f"Species_{df_pet_info['species']}"
     df_filtered = filter_by_condition(df_products, species_col, 1)
 
 
@@ -580,32 +579,20 @@ def filter_products(df_pet_info, df_products):
     bds = df_pet_info.iloc[0]['body score (bds)']
     if bds >= 7: # >8 Means Obesity  and >7 Overweight
         df_filtered = filter_by_condition(df_filtered, 'for_weight management', 1)
-        #mask = df_filtered['for_weight management'] == 1
-        #df_filtered.loc[mask, 'Score'] += 10
         df_filtered = filter_by_condition(df_filtered, 'not_for_overweight', 0)
-        #mask = df_filtered['not_for_overweight'] == 0
-        #df_filtered.loc[mask, 'Score'] += 10
-        #df_filtered = filter_by_condition(df_filtered, 'category_low calorie', 1)
         mask = df_filtered['category_low calorie'] == 1
         df_filtered.loc[mask, 'Score'] += 5
 
     elif bds <= 3: # Means Underweight
         df_filtered = filter_by_condition(df_filtered, 'for_weight management', 0)
-        #mask = df_filtered['for_weight management'] == 0
-        #df_filtered.loc[mask, 'Score'] += 10
-        #df_filtered = filter_by_condition(df_filtered, 'for_appetite stimulation', 1)
         mask = df_filtered['for_appetite stimulation'] == 1
         df_filtered.loc[mask, 'Score'] += 10
-        #df_filtered = filter_by_condition(df_filtered, 'not_for_underweight', 0)
         mask = df_filtered['not_for_overweight'] == 0
         df_filtered.loc[mask, 'Score'] += 10
-        #df_filtered = filter_by_condition(df_filtered, 'not_for_catabolic states', 0)
         mask = df_filtered['not_for_catabolic states'] == 0
         df_filtered.loc[mask, 'Score'] += 5
-        #df_filtered = filter_by_condition(df_filtered, 'category_high calorie', 1)
         mask = df_filtered['category_high calorie'] == 1
         df_filtered.loc[mask, 'Score'] += 10
-        #df_filtered = filter_by_condition(df_filtered, 'category_high protein', 1)
         mask = df_filtered['category_high protein'] == 1
         df_filtered.loc[mask, 'Score'] += 5
 
@@ -629,7 +616,6 @@ def filter_products(df_pet_info, df_products):
         for issue in df_pet_info.iloc[0]['other_issues_list']:
             if issue in disease_product_mapping:
                 disease_info = disease_product_mapping[issue]
-                #print("Other_disease_info",disease_info)
                 df_filtered = filter_for_tags(df_filtered, disease_info,'other_issues')
                 df_filtered = filter_not_for_tags(df_filtered, disease_info,'other_issues')
                 df_filtered = filter_type_tags(df_filtered, disease_info,'other_issues')
@@ -642,7 +628,7 @@ def filter_products(df_pet_info, df_products):
 
     # if df_pet_info['activity level'] == 'Active':
     activity_level = df_pet_info.iloc[0]['activity level']
-    if activity_level == 'Active':
+    if activity_level == 'active':
         mask = df_filtered['not_for_active pets'] == 0
         df_filtered.loc[mask, 'Score'] += 10
 
@@ -659,17 +645,3 @@ def filter_products(df_pet_info, df_products):
     scored_products = list(zip(sorted_df['Product_id'], sorted_df['Score']))
 
     return scored_products, len(scored_products)
-
-
-    
-    product_ids, count = filter_products(df_pet_info, df_products)
-    
-    # # Display the filtered products
-    # st.write(f"Pet Profile: {df_pet_info}")
-    st.write(f"Recommended Products: {product_ids}")
-
-    st.write("### Recommended Products:")
-    for _, row in recommended_products.iterrows():
-	    st.write(f"- {row['Product_Name']} (ID: {row['Product_ID']})")
-
-

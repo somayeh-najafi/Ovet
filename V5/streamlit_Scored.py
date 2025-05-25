@@ -4,8 +4,6 @@ from rule_based_v5_scored import filter_products
 
 # Load product data
 df_products = pd.read_csv("encoded_all_products.csv")
-#df_productdata = pd.read_csv("Products_final_cleaned.csv")
-
 
 # ------------------ Hardcoded Lists ------------------
 
@@ -51,12 +49,9 @@ allergy_list = sorted([
 activity_levels = ["Active", "Not Active"]
 life_stages = ["Growth", "Adult", "Senior"]
 
-
 # Set up page config
 st.set_page_config(page_title="Pet Nutrition Recommender", layout="centered")
 st.title("🐾🐶Pet Food Recommendation Tool - Rule-Based Recommendations🐱🐾")
-
-
 
 # Initialize session state for form persistence
 if 'form_data' not in st.session_state:
